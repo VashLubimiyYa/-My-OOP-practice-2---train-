@@ -1,0 +1,77 @@
+Assignment 2
+
+// Car is the parent class for all types of cars
+class Car {
+    int passengers;
+    int weight;
+
+    public Car(int passengers, int weight) {
+        this.passengers = passengers;
+        this.weight = weight;
+    }
+}
+
+// Locomotive is a child class of Car
+class Locomotive extends Car {
+    int power;
+    public Locomotive(int passengers, int weight, int power) {
+        super(passengers, weight);
+        this.power = power;
+    }
+}
+
+// PassengerCar is a child class of Car
+class PassengerCar extends Car {
+    public PassengerCar(int passengers, int weight) {
+        super(passengers, weight);
+    }
+}
+
+// FreightCar is a child class of Car
+class FreightCar extends Car {
+    int cargoWeight;
+
+    public FreightCar(int weight, int cargoWeight) {
+        super(0, weight);
+        this.cargoWeight = cargoWeight;
+    }
+}
+
+// Train class
+class Train {
+    ArrayList<Car> cars;
+
+    public Train() {
+        cars = new ArrayList<Car>();
+    }
+
+    public void addCar(Car car) {
+        cars.add(car);
+    }
+
+    public int totalPassengers() {
+        int total = 0;
+        for (Car car : cars) {
+            total += car.passengers;
+        }
+        return total;
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        // Create a new train
+        Train myTrain = new Train();
+
+        // Add cars to the train
+        myTrain.addCar(new Locomotive(0, 20000, 3000));
+        myTrain.addCar(new PassengerCar(50, 10000));
+        myTrain.addCar(new PassengerCar(40, 10000));
+        myTrain.addCar(new FreightCar(15000, 50000));
+        myTrain.addCar(new FreightCar(15000, 60000));
+
+        // Print the total number of passengers
+        System.out.println("Total number of passengers: " + myTrain.totalPassengers());
+    }
+}
